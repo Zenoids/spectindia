@@ -10,10 +10,10 @@
           <th scope="col">Facebook Id</th>
           <th scope="col">Twitter Id</th>
           <th scope="col">address</th>
-          <th scope="col">Ward #</th>
-          <th scope="col">Assembly Constituency</th>
-          <th scope="col">Parliament Seat</th>
           <th scope="col">State</th>
+          <th scope="col">Parliament Seat</th>
+          <th scope="col">Assembly Constituency</th>
+          <th scope="col">Ward #</th>
           <th scope="col">Contribution Options</th>
           <th scope="col">About Yourself</th>
           <th scope="col">File Uploaded</th>
@@ -32,10 +32,10 @@
                 <td>{{ $volunteer->facebook_id }}</td>
                 <td>{{ $volunteer->twitter_id }}</td>
                 <td>{{ $volunteer->address }}</td>
+                <td>{{ $volunteer->state->name }}</td>
+                <td>{{ $volunteer->parliament_seat->name}}</td>
+                <td>{{ $volunteer->assembly_constituency->name }}</td>
                 <td>{{ $volunteer->ward_name_no }}</td>
-                <td>{{ $volunteer->assembly_constituency }}</td>
-                <td>{{ $volunteer->parliament_seat}}</td>
-                <td>{{ $volunteer->state }}</td>
                 <td>{{ $volunteer->contribute_options }}</td>
                 <td>{{ $volunteer->about_yourself}}</td>
                 <td><a class="btn btn-outline-info" href="{{ asset('storage/' . $volunteer->file_path) }}">View File</a></td>

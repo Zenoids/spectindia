@@ -24,6 +24,10 @@ Wi2aQK6Y7PZL+Pe/Ihv5El1CvWc1Em++J" crossorigin="anonymous">
         @import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);
         @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
     </style>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -40,7 +44,48 @@ Wi2aQK6Y7PZL+Pe/Ihv5El1CvWc1Em++J" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
             <!-- Core theme JS-->
-            <script src="scripts.js"></script>
+            {{-- <script src="scripts.js"></script> --}}
+            
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#state').on('change', function () {
+                        var stateId = this.value;
+                        $('#parliament_seat').html('');
+                        $.ajax({
+                            url: '{{ route('getSeats') }}?state_id='+stateId,
+                            type: 'get',
+                            success: function (res) {
+                                $('#parliament_seat').html('<option value="">Select Parliament Seats</option>');
+                                $.each(res, function (key, value) {
+                                    $('#parliament_seat').append('<option value="' + value
+                                        .id + '">' + value.name + '</option>');
+                                });
+                                $('#assembly_constituency').html('" "');
+                                // $('#assembly_constituency').prop('disabled', true);
+
+                            }
+                        });
+                    });
+                    $('#parliament_seat').on('change', function () {
+                        var seatId = this.value;
+                        $('#assembly_constituency').html('');
+                        $.ajax({
+                            url: '{{ route('getConstituencies') }}?seats_id='+seatId,
+                            type: 'get',
+                            success: function (res) {
+                                // $('#assembly_constituency').prop('disabled', false);
+
+                                $('#assembly_constituency').html('<option value="">Select assembly constituency</option>');
+                                $.each(res, function (key, value) {
+                                    $('#assembly_constituency').append('<option value="' + value
+                                        .id + '">' + value.name + '</option>');
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+            
     </body>
     
     </html>

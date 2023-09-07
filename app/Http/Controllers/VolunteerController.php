@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ThankYouEmail;
+use App\Models\Constituency;
+use App\Models\Seat;
 use App\Models\State;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -90,7 +93,7 @@ class VolunteerController extends Controller
             } else {
                 $file_path = null;
             }
-            
+         
             // Create a new Volunteer record
             Volunteer::create([
                 'voter_id' => $request->input('voter_id'),
@@ -129,7 +132,8 @@ class VolunteerController extends Controller
      */
     public function show($id)
     {
-        $data= Volunteer::find($id);
+    $data = Volunteer::with('state', 'parliamentSeat', 'assemblyConstituency')->find($id);
+        // $data= Volunteer::find($id);
         return view('volunteer.show')->with('volunteer',$data);
     }
 
@@ -165,5 +169,30 @@ class VolunteerController extends Controller
     public function destroy(Volunteer $volunteer)
     {
         //
+    }
+
+    
+    public function getSeats(Request $request)
+    {
+        
+        $seats = Seat::where('state_id', $request->state_id)->get();
+// dd($seats);
+        if (count($seats) > 0) {
+            return response()->json($seats);
+        } 
+    }
+    
+    /**
+     * Return constituencies list
+     *
+     * @return json
+     */
+    public function getConstituencies(Request $request)
+    {
+        $constituencies = Constituency::where('seats_id', $request->seats_id)->get();
+    
+        if (count($constituencies) > 0) {
+            return response()->json($constituencies);
+        }
     }
 }

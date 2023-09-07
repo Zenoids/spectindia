@@ -39,6 +39,8 @@ Route::get('/contact', function () {
 
 
 Route::get('/register', [VolunteerController::class, 'create'])->name('register');
+Route::get('/getseats', [VolunteerController::class, 'getSeats'])->name('getSeats');
+Route::get('/getconstituencies', [VolunteerController::class, 'getConstituencies'])->name('getConstituencies');
 Route::post('/register', [VolunteerController::class, 'store'])->name('register.submit');
 Route::get('/thankyou', function(){
     return view('thanks');

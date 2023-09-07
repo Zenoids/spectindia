@@ -79,9 +79,10 @@ class VolunteersExport implements FromView
         if ($this->volunteerId) {
             $query->where('id', $this->volunteerId);
         }
-
+        // dd($query->with('state', 'parliament_seat', 'assembly_constituency')->get());
         return view('exports.volunteers', [
-            'volunteers' => $query->get()
+            'volunteers' => $query->with('state', 'parliament_seat', 'assembly_constituency')->get()
         ]);
     }
 }
+// $volunteers = Volunteer::with('state', 'parliament_seat', 'assembly_constituency')->get();

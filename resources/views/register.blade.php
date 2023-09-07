@@ -43,89 +43,89 @@
 // ]; 
 //INSERT INTO seats (name, state_id) VALUES ('Araku (ST)', 1),('Chittoor (SC)', 1);
 
-$parliamentSeats = [
-"Araku (ST)",
-"Srikakulam",
-"Vizianagaram",
-"Visakhapatnam",
-"Anakapalli",
-"Kakinada",
-"Amalapuram (SC)",
-"Rajahmundry",
-"Narasapuram",
-"Eluru",
-"Machilipatnam",
-"Vijayawada",
-"Guntur",
-"Narasaraopet",
-"Bapatla (SC)",
-"Ongole",
-"Nandyal",
-"Kurnool",
-"Anantapur",
-"Hindupur",
-"Kadapa",
-"Nellore",
-"Tirupati (SC)",
-"Rajampet",
-"Chittoor (SC)",
-"Arunachal West",
-"Arunachal East",
-"Karimganj (SC)",
-"Silchar",
-"Autonomous District (ST)",
-"Dhubri",
-"Kokrajhar (ST)",
-"Barpeta",
-"Gauhati",
-"Mangaldoi",
-"Tezpur",
-"Nowgong",
-"Kaliabor",
-"Jorhat",
-"Dibrugarh",
-"Lakhimpur",
-"Valmiki Nagar",
-"Paschim Champaran",
-"Purvi Champara",
-"Sheohar",
-"Sitamarhi",
-"Madhubani",
-"Jhanjharpur",
-"Supaul",
-"Araria",
-"Kishanganj",
-"Katihar",
-"Purnia",
-"Madhepura",
-"Muzaffarpur",
-"Darbhanga",
-"Vaishali",
-"Gopalganj (SC)",
-"Siwan",
-"Maharajganj",
-"Saran",
-"Hajipur (SC)",
-"Ujiarpur",
-"Samastipur (SC)",
-"Begusarai",
-"Khagaria",
-"Bhagalpur",
-"Banka",
-"Munger",
-"Nalanda",
-"Patna Sahib",
-"Pataliputra",
-"Arrah",
-"Buxar",
-"Sasaram (SC)",
-"Karakat",
-"Jahanabad",
-"Aurangabad",
-"Gaya (SC)",
-"Nawada",
-"Jamui (SC)",
-];
+// $parliamentSeats = [
+// "Araku (ST)",
+// "Srikakulam",
+// "Vizianagaram",
+// "Visakhapatnam",
+// "Anakapalli",
+// "Kakinada",
+// "Amalapuram (SC)",
+// "Rajahmundry",
+// "Narasapuram",
+// "Eluru",
+// "Machilipatnam",
+// "Vijayawada",
+// "Guntur",
+// "Narasaraopet",
+// "Bapatla (SC)",
+// "Ongole",
+// "Nandyal",
+// "Kurnool",
+// "Anantapur",
+// "Hindupur",
+// "Kadapa",
+// "Nellore",
+// "Tirupati (SC)",
+// "Rajampet",
+// "Chittoor (SC)",
+// "Arunachal West",
+// "Arunachal East",
+// "Karimganj (SC)",
+// "Silchar",
+// "Autonomous District (ST)",
+// "Dhubri",
+// "Kokrajhar (ST)",
+// "Barpeta",
+// "Gauhati",
+// "Mangaldoi",
+// "Tezpur",
+// "Nowgong",
+// "Kaliabor",
+// "Jorhat",
+// "Dibrugarh",
+// "Lakhimpur",
+// "Valmiki Nagar",
+// "Paschim Champaran",
+// "Purvi Champara",
+// "Sheohar",
+// "Sitamarhi",
+// "Madhubani",
+// "Jhanjharpur",
+// "Supaul",
+// "Araria",
+// "Kishanganj",
+// "Katihar",
+// "Purnia",
+// "Madhepura",
+// "Muzaffarpur",
+// "Darbhanga",
+// "Vaishali",
+// "Gopalganj (SC)",
+// "Siwan",
+// "Maharajganj",
+// "Saran",
+// "Hajipur (SC)",
+// "Ujiarpur",
+// "Samastipur (SC)",
+// "Begusarai",
+// "Khagaria",
+// "Bhagalpur",
+// "Banka",
+// "Munger",
+// "Nalanda",
+// "Patna Sahib",
+// "Pataliputra",
+// "Arrah",
+// "Buxar",
+// "Sasaram (SC)",
+// "Karakat",
+// "Jahanabad",
+// "Aurangabad",
+// "Gaya (SC)",
+// "Nawada",
+// "Jamui (SC)",
+// ];
 
 @endphp
 
@@ -205,7 +205,7 @@ $parliamentSeats = [
                                 <option value="" selected>Select State</option>
 
                                 @foreach($states as $state)
-                                    <option value="{{ $state->name }}" @if(old('state') == $state->name) selected @endif>{{ $state->name }}</option>
+                                    <option value="{{ $state->id }}" @if(old('state') == $state->name) selected @endif>{{ $state->name }}</option>
                                 @endforeach
                             </select>
                             
@@ -215,18 +215,28 @@ $parliamentSeats = [
                         <div class="col-12 col-md-4 mt-3">
                             <label for="parliament_seat" class="form-label">Parliament Seat</label>
                             <select class="form-select col-12 col-md-4" aria-label="Default select example" id="parliament_seat" name="parliament_seat" required>
-                                <option value="" selected>Select Parliament seat</option>
-                                @foreach ($parliamentSeats as $seat)
+                                {{-- <option value="" selected>Select Parliament seat</option>
+                                @foreach ($seats as $seat)
                                     <option value="{{ $seat }}" @if (old('parliament_seat') == $seat) selected @endif>{{ $seat }}</option>
-                                @endforeach
+                                @endforeach --}}
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4 mt-3">
+                            <label for="assembly_constituency" class="form-label">Assembly Constituency</label>
+                            <select class="form-select col-12 col-md-4" aria-label="Default select example" id="assembly_constituency" name="assembly_constituency" required>
+                                {{-- <option value="" selected>Select Parliament seat</option>
+                                @foreach ($seats as $seat)
+                                    <option value="{{ $seat }}" @if (old('parliament_seat') == $seat) selected @endif>{{ $seat }}</option>
+                                @endforeach --}}
                             </select>
                         </div>
 
                         
-                        <div class="col-12 col-md-4 mt-3">
+                        {{-- <div class="col-12 col-md-4 mt-3">
                             <label for="assembly_constituency" class="form-label">Assembly Constituency</label>
                             <input type="text" class="form-control" id="assembly_constituency" name="assembly_constituency" value="{{ old('assembly_constituency') }}" required>
-                        </div>
+                        </div> --}}
                       
 
                         <div class="col-12 col-md-4 mt-3">
